@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <script async src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
