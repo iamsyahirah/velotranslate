@@ -1,12 +1,20 @@
 "use client";
 
+import "regenerator-runtime/runtime";
 import Image from "next/image";
 import React, { useState, ChangeEvent } from 'react';
 import TextArea from '../components/Inputs/TextArea';
+import SpeechRecognitionComponent from '../components/SpeechRecognition/SpeechRecognition';
+import { IconVolume } from '@tabler/icons-react';
 
 export default function Home() {
 
   const [sourceText, setSourceText] = useState<string>("");
+
+  const handleAudioPlayback = (text: string) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  }
 
   return (
     <div>
@@ -30,7 +38,11 @@ export default function Home() {
                     placeholder="Source Language"
                   />
                   <div className="flex flex-row justify-between w-full">
-                    <span className="cursor-pointer flex space-x-2 flex-row"></span>
+                    <span className="cursor-pointer flex space-x-2 flex-row">
+                      <SpeechRecognitionComponent setSourceText={setSourceText} />
+                      <IconVolume size={22}
+                        onClick={() => handleAudioPlayback(sourceText)} />
+                    </span>
                   </div>
                 </div>
               </div>
